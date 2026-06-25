@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
+
 import "../styles/Navbar.css";
 
 function Navbar() {
   return (
     <nav className="navbar">
 
-      <h2>GymMS</h2>
+      <div className="logo">
+        GymMS
+      </div>
 
       <div className="nav-links">
 
