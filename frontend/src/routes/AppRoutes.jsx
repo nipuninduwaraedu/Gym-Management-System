@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
+import MainLayout from "../layouts/MainLayout";
+
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Pricing from "../pages/Pricing";
@@ -9,13 +11,41 @@ function AppRoutes() {
   return (
     <Routes>
 
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <MainLayout>
+            <Home />
+          </MainLayout>
+        }
+      />
 
-      <Route path="/about" element={<About />} />
+      <Route
+        path="/about"
+        element={
+          <MainLayout>
+            <About />
+          </MainLayout>
+        }
+      />
 
-      <Route path="/pricing" element={<Pricing />} />
+      <Route
+        path="/pricing"
+        element={
+          <MainLayout>
+            <Pricing />
+          </MainLayout>
+        }
+      />
 
-      <Route path="/contact" element={<Contact />} />
+      <Route
+        path="/contact"
+        element={
+          <MainLayout>
+            <Contact />
+          </MainLayout>
+        }
+      />
 
     </Routes>
   );
