@@ -49,11 +49,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = {
-  registerUser,
-  loginUser,
-};
-
 const loginUser = async (req, res) => {
   try {
     console.log("Login API Hit");
@@ -103,4 +98,9 @@ const loginUser = async (req, res) => {
       message: "Server Error",
     });
   }
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
 };
