@@ -4,9 +4,7 @@ const router = express.Router();
 
 const protect = require("../middleware/authMiddleware");
 
-const {
-  getProfile,
-} = require("../controllers/userController");
+const { getProfile } = require("../controllers/userController");
 
 router.get("/profile", protect, getProfile);
 
