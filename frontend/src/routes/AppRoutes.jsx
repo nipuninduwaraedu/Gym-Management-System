@@ -10,43 +10,16 @@ import Contact from "../pages/Contact";
 function AppRoutes() {
   return (
     <Routes>
+      {/* Public Layout */}
+      <Route element={<MainLayout />}>
+        <Route index element={<Home />} />
 
-      <Route
-        path="/"
-        element={
-          <MainLayout>
-            <Home />
-          </MainLayout>
-        }
-      />
+        <Route path="about" element={<About />} />
 
-      <Route
-        path="/about"
-        element={
-          <MainLayout>
-            <About />
-          </MainLayout>
-        }
-      />
+        <Route path="pricing" element={<Pricing />} />
 
-      <Route
-        path="/pricing"
-        element={
-          <MainLayout>
-            <Pricing />
-          </MainLayout>
-        }
-      />
-
-      <Route
-        path="/contact"
-        element={
-          <MainLayout>
-            <Contact />
-          </MainLayout>
-        }
-      />
-
+        <Route path="contact" element={<Contact />} />
+      </Route>
     </Routes>
   );
 }
