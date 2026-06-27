@@ -6,19 +6,17 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Pricing from "../pages/Pricing";
 import Contact from "../pages/Contact";
+import Register from "../pages/auth/Register";
 
 function AppRoutes() {
   return (
     <Routes>
-      {/* Public Layout */}
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
-
         <Route path="about" element={<About />} />
-
         <Route path="pricing" element={<Pricing />} />
-
         <Route path="contact" element={<Contact />} />
+        <Route path="register" element={<Register />} />
       </Route>
     </Routes>
   );
