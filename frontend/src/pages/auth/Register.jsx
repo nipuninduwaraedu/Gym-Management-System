@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { registerUser } from "../../services/authService";
 import "./Register.css";
 
 function Register() {
@@ -10,6 +11,8 @@ function Register() {
   });
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,62 +23,115 @@ function Register() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setError("");
+    setSuccess("");
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
-    setError("");
+    try {
+      setLoading(true);
 
-    console.log("Register Form Data");
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      };
 
-    console.log(formData);
+      const data = await registerUser(userData);
+
+      console.log("Registration Successful");
+      console.log(data);
+
+      setSuccess(data.message);
+
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      console.error(error);
+
+      setError(error.message || "Registration failed.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <section className="register-page">
       <div className="register-card">
-        <h2>Create Account</h2>
+        <h2>Create Your Account</h2>
+
+        <p className="register-subtitle">Join our Gym Management System</p>
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-          />
+          <div className="form-group">
+            <label>Full Name</label>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={formData.email}
-            onChange={handleChange}
-          />
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your full name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-          />
+          <div className="form-group">
+            <label>Email Address</label>
 
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Password</label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Confirm Password</label>
+
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Re-enter password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
           {error && <p className="error-message">{error}</p>}
 
-          <button type="submit">Register</button>
+          {success && <p className="success-message">{success}</p>}
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </button>
         </form>
       </div>
     </section>
