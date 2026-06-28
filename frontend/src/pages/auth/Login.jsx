@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { loginUser } from "../../services/authService";
 import "./Login.css";
 
 function Login() {
@@ -11,34 +12,50 @@ function Login() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-    setFormData((prev) => ({
-      ...prev,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     setError("");
     setSuccess("");
 
     if (!formData.email || !formData.password) {
-      setError("Please fill all fields.");
+      setError("Please fill in all fields.");
       return;
     }
 
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    console.log("Login Data:", formData);
+      const data = await loginUser(formData);
 
-    setTimeout(() => {
+      console.log("Login Successful");
+      console.log(data);
+
+      localStorage.setItem("token", data.token);
+
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      setSuccess(data.message);
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+
+      setError(error.message || "Login failed.");
+    } finally {
       setLoading(false);
-      setSuccess("Login form submitted (backend not connected yet)");
-    }, 1000);
+    }
   };
 
   return (
@@ -46,11 +63,11 @@ function Login() {
       <div className="login-card">
         <h2>Welcome Back</h2>
 
-        <p className="login-subtitle">Login to your Gym Account</p>
+        <p className="login-subtitle">Login to your Gym Management System</p>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
+            <label>Email Address</label>
 
             <input
               type="email"
@@ -80,7 +97,7 @@ function Login() {
           {success && <p className="success-message">{success}</p>}
 
           <button type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Logging In..." : "Login"}
           </button>
         </form>
       </div>
