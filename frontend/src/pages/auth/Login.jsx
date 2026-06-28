@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { loginUser } from "../../services/authService";
+import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
 
 function Login() {
@@ -11,6 +12,8 @@ function Login() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { login } = useContext(AuthContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,6 +27,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Clear previous messages
     setError("");
     setSuccess("");
 
@@ -40,9 +44,7 @@ function Login() {
       console.log("Login Successful");
       console.log(data);
 
-      localStorage.setItem("token", data.token);
-
-      localStorage.setItem("user", JSON.stringify(data.user));
+      login(data.user, data.token);
 
       setSuccess(data.message);
 
