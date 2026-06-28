@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/AuthContext";
 
-import "./Navbar.css";
+import "../styles/NavBar.css";
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
