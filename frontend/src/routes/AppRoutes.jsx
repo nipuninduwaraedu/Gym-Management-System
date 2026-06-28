@@ -14,6 +14,8 @@ import UserDashboard from "../pages/dashboard/UserDashboard";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 
+import Profile from "../pages/Profile";
+
 function AppRoutes() {
   return (
     <Routes>
@@ -32,6 +34,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <UserDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }
       />
