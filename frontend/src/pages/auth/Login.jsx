@@ -1,9 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { loginUser } from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
+
 import "./Login.css";
 
 function Login() {
+  const navigate = useNavigate();
+  const { login, user } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,26 +19,27 @@ function Login() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { login } = useContext(AuthContext);
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // Clear previous messages
     setError("");
     setSuccess("");
 
     if (!formData.email || !formData.password) {
-      setError("Please fill in all fields.");
+      setError("All fields are required");
       return;
     }
 
@@ -41,20 +48,16 @@ function Login() {
 
       const data = await loginUser(formData);
 
-      console.log("Login Successful");
-      console.log(data);
+      console.log("LOGIN RESPONSE:", data);
 
       login(data.user, data.token);
 
       setSuccess(data.message);
 
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-
-      setError(error.message || "Login failed.");
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+      setError(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -65,41 +68,36 @@ function Login() {
       <div className="login-card">
         <h2>Welcome Back</h2>
 
-        <p className="login-subtitle">Login to your Gym Management System</p>
+        <p>Login to Gym Management System</p>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email Address</label>
-
+            <label>Email</label>
             <input
               type="email"
               name="email"
-              placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
-              required
+              placeholder="Enter email"
             />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-
             <input
               type="password"
               name="password"
-              placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
-              required
+              placeholder="Enter password"
             />
           </div>
 
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error">{error}</p>}
+          {success && <p className="success">{success}</p>}
 
-          {success && <p className="success-message">{success}</p>}
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Logging In..." : "Login"}
+          <button disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>
