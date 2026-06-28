@@ -6,20 +6,35 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Pricing from "../pages/Pricing";
 import Contact from "../pages/Contact";
-import Register from "../pages/auth/Register";
+
 import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
+
+import UserDashboard from "../pages/dashboard/UserDashboard";
+
+import ProtectedRoute from "../components/ProtectedRoute";
 
 function AppRoutes() {
   return (
     <Routes>
       <Route element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="pricing" element={<Pricing />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/contact" element={<Contact />} />
       </Route>
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <UserDashboard />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }
