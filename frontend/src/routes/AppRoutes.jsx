@@ -18,6 +18,7 @@ import Profile from "../pages/Profile";
 import Booking from "../pages/Booking";
 import MyBookings from "../pages/MyBookings";
 import AdminBookings from "../pages/AdminBookings";
+import Dashboard from "../pages/Dashboard";
 
 function AppRoutes() {
   return (
@@ -59,6 +60,7 @@ function AppRoutes() {
         }
       />
       <Route path="/admin/bookings" element={<AdminBookings />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 }
