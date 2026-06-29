@@ -1,0 +1,40 @@
+const mongoose = require("mongoose");
+
+const membershipSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+    },
+
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    duration: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+
+module.exports = mongoose.model("Membership", membershipSchema);
