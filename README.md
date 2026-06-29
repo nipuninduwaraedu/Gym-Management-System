@@ -7,7 +7,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![JWT](https://img.shields.io/badge/Auth-JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+
 
 A full-stack web application for managing gym memberships, session bookings, and administrative operations — built with the MERN Stack.
 
@@ -24,11 +24,9 @@ A full-stack web application for managing gym memberships, session bookings, and
 - [Getting Started](#-getting-started)
 - [Environment Variables](#-environment-variables)
 - [API Reference](#-api-reference)
-- [Screenshots](#-screenshots)
 - [Future Improvements](#-future-improvements)
 - [Learning Outcomes](#-learning-outcomes)
 - [Author](#-author)
-- [License](#-license)
 
 ---
 
@@ -281,23 +279,6 @@ JWT_SECRET=your_jwt_secret_key_here
 
 ---
 
-## 📸 Screenshots
-
-### 🏠 Home Page
-![Home Page](screenshots/home.png)
-
-### 📊 User Dashboard
-![Dashboard](screenshots/dashboard.png)
-
-### 📅 Booking Page
-![Booking](screenshots/booking.png)
-
-### 🛡️ Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
-
-> 📌 Add your screenshots to a `screenshots/` folder in the root of the repository.
-
----
 
 ## 🔮 Future Improvements
 
