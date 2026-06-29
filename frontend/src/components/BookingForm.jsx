@@ -1,9 +1,8 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { createBooking } from "../services/bookingService";
-import "./BookingForm.css";
 
-import "./BookingForm.css";
+import "../styles/BookingForm.css";
 
 function BookingForm({ onBookingCreated }) {
   const { token } = useContext(AuthContext);

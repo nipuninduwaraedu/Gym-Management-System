@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const generateToken = (user) => {
@@ -38,9 +38,17 @@ const registerUser = async (req, res) => {
       role: "user",
     });
 
+    const token = generateToken(user);
+
     res.status(201).json({
       message: "User registered successfully",
-      userId: user._id,
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
     });
   } catch (error) {
     console.log("REGISTER ERROR:", error);

@@ -44,9 +44,15 @@ function Navbar() {
           </>
         ) : (
           <>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
+            {user?.role === "admin" ? (
+              <li>
+                <Link to="/admin/bookings">Admin Bookings</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+            )}
 
             <li>
               <button onClick={handleLogout} className="logout-btn">

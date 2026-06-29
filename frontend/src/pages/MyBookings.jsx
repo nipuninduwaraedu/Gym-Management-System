@@ -3,6 +3,8 @@ import { AuthContext } from "../context/AuthContext";
 
 import { getMyBookings, deleteBooking } from "../services/bookingService";
 
+import "./MyBookings.css";
+
 function MyBookings() {
   const { token } = useContext(AuthContext);
 

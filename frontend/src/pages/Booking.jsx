@@ -1,7 +1,8 @@
 import BookingForm from "../components/BookingForm";
 
-function Booking() {
+import "./Booking.css";
 
+function Booking() {
   const handleRefresh = () => {
     window.location.reload();
   };
@@ -11,7 +12,6 @@ function Booking() {
       <h1>Gym Booking System</h1>
 
       <BookingForm onBookingCreated={handleRefresh} />
-
     </div>
   );
 }

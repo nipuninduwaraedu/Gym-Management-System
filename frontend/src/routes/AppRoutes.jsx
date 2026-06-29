@@ -10,8 +10,6 @@ import Contact from "../pages/Contact";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 
-import UserDashboard from "../pages/dashboard/UserDashboard";
-
 import ProtectedRoute from "../components/ProtectedRoute";
 
 import Profile from "../pages/Profile";
@@ -37,7 +35,7 @@ function AppRoutes() {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <UserDashboard />
+            <Dashboard />
           </ProtectedRoute>
         }
       />
@@ -59,8 +57,14 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
-      <Route path="/admin/bookings" element={<AdminBookings />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/admin/bookings"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminBookings />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

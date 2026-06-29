@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { getMemberships } from "../services/membershipService";
 
-import "./Pricing.css";
+import "../styles/Pricing.css";
 
 function Pricing() {
   const [memberships, setMemberships] = useState([]);
