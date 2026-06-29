@@ -15,7 +15,7 @@ function Profile() {
     const fetchProfile = async () => {
       try {
         const data = await getUserProfile(token);
-        setProfile(data.user);
+        setProfile(data.data);
       } catch (err) {
         setError(err.message || "Failed to load profile");
       } finally {

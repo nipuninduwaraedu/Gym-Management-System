@@ -45,14 +45,31 @@ function Navbar() {
         ) : (
           <>
             {user?.role === "admin" ? (
-              <li>
-                <Link to="/admin/bookings">Admin Bookings</Link>
-              </li>
+              <>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <Link to="/admin/bookings">Admin Bookings</Link>
+                </li>
+              </>
             ) : (
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
+              <>
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <Link to="/booking">Book Session</Link>
+                </li>
+                <li>
+                  <Link to="/my-bookings">My Bookings</Link>
+                </li>
+              </>
             )}
+
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
 
             <li>
               <button onClick={handleLogout} className="logout-btn">

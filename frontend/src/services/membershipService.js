@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/memberships";
+import api from "./api";
 
 export const getMemberships = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await api.get("/memberships");
 
     return response.data;
   } catch (error) {

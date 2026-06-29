@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/bookings";
+import api from "./api";
 
 export const createBooking = async (data, token) => {
   try {
-    const response = await axios.post(API_URL, data, {
+    const response = await api.post("/bookings", data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -18,7 +16,7 @@ export const createBooking = async (data, token) => {
 
 export const getMyBookings = async (token) => {
   try {
-    const response = await axios.get(`${API_URL}/my`, {
+    const response = await api.get("/bookings/my", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -32,7 +30,7 @@ export const getMyBookings = async (token) => {
 
 export const deleteBooking = async (id, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`, {
+    const response = await api.delete(`/bookings/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

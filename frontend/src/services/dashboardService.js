@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/api";
+import api from "./api";
 
 export const getUserDashboard = async (token) => {
   try {
-    const response = await axios.get(`${API_URL}/bookings/my`, {
+    const response = await api.get("/bookings/my", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -18,7 +16,7 @@ export const getUserDashboard = async (token) => {
 
 export const getAdminDashboard = async (token) => {
   try {
-    const response = await axios.get(`${API_URL}/bookings/admin/all`, {
+    const response = await api.get("/bookings/admin/all", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

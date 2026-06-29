@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/bookings";
+import api from "./api";
 
 export const getAllBookings = async (token) => {
   try {
-    const response = await axios.get(`${API_URL}/admin/all`, {
+    const response = await api.get("/bookings/admin/all", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -18,8 +16,8 @@ export const getAllBookings = async (token) => {
 
 export const updateBookingStatus = async (id, status, token) => {
   try {
-    const response = await axios.put(
-      `${API_URL}/admin/${id}`,
+    const response = await api.put(
+      `/bookings/admin/${id}`,
       { status },
       {
         headers: {
@@ -36,7 +34,7 @@ export const updateBookingStatus = async (id, status, token) => {
 
 export const deleteBookingAdmin = async (id, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/admin/${id}`, {
+    const response = await api.delete(`/bookings/admin/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
