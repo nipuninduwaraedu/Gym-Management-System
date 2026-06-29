@@ -17,6 +17,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import Profile from "../pages/Profile";
 import Booking from "../pages/Booking";
 import MyBookings from "../pages/MyBookings";
+import AdminBookings from "../pages/AdminBookings";
 
 function AppRoutes() {
   return (
@@ -57,6 +58,7 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route path="/admin/bookings" element={<AdminBookings />} />
     </Routes>
   );
 }
