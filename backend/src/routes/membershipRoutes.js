@@ -9,14 +9,14 @@ const {
   deleteMembership,
 } = require("../controllers/membershipController");
 
-router.post("/", createMembership);
+const protect = require("../middleware/authMiddleware");
+const adminOnly = require("../middleware/adminMiddleware");
 
 router.get("/", getMemberships);
-
 router.get("/:id", getMembershipById);
 
-router.put("/:id", updateMembership);
-
-router.delete("/:id", deleteMembership);
+router.post("/", protect, adminOnly, createMembership);
+router.put("/:id", protect, adminOnly, updateMembership);
+router.delete("/:id", protect, adminOnly, deleteMembership);
 
 module.exports = router;
