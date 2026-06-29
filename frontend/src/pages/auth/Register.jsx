@@ -14,6 +14,7 @@ function Register() {
     name: "",
     email: "",
     password: "",
+    role: "user",
   });
 
   const [error, setError] = useState("");
@@ -103,6 +104,18 @@ function Register() {
               onChange={handleChange}
               placeholder="Enter password"
             />
+          </div>
+
+          <div className="form-group">
+            <label>Role</label>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
 
           {error && <p className="error">{error}</p>}
