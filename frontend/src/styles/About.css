@@ -1,4 +1,210 @@
+/* ====================================
+   ABOUT PAGE STYLES
+   ==================================== */
+
 .about {
+  width: 100%;
+}
+
+/* About Hero */
+.about-hero {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #F8FAFC 0%, #E0F2FE 100%);
   text-align: center;
-  padding: 50px;
+}
+
+.about-hero h1 {
+  font-size: 3rem;
+  color: var(--secondary);
+  margin-bottom: 16px;
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+/* About Content */
+.about-content {
+  padding: 80px 0;
+}
+
+/* Mission & Vision */
+.mission-vision {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.mv-card {
+  text-align: center;
+  padding: 40px;
+}
+
+.mv-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.mv-card h3 {
+  font-size: 1.6rem;
+  color: var(--secondary);
+  margin-bottom: 12px;
+}
+
+.mv-card p {
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* Story Section */
+.story-section {
+  margin-bottom: 80px;
+}
+
+.story-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.story-text h2 {
+  font-size: 2.2rem;
+  color: var(--secondary);
+  margin-bottom: 24px;
+}
+
+.story-text p {
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.story-image {
+  display: flex;
+  justify-content: center;
+}
+
+.image-placeholder {
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--primary) 0%, #1D4ED8 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+}
+
+/* Trainers Section */
+.trainers-section {
+  margin-bottom: 80px;
+}
+
+.trainers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.trainer-card {
+  text-align: center;
+  padding: 30px;
+}
+
+.trainer-avatar {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--primary) 0%, #1D4ED8 100%);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.trainer-card h4 {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  margin-bottom: 8px;
+}
+
+.trainer-role {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* Facilities Section */
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.facility-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 30px 20px;
+}
+
+.facility-icon {
+  font-size: 3rem;
+}
+
+.facility-name {
+  font-weight: 600;
+  color: var(--secondary);
+  font-size: 1.1rem;
+}
+
+/* ====================================
+   RESPONSIVE STYLES
+   ==================================== */
+
+@media (max-width: 968px) {
+  .about-hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .mission-vision {
+    grid-template-columns: 1fr;
+  }
+
+  .story-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .story-image {
+    order: -1;
+  }
+
+  .image-placeholder {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 568px) {
+  .about-hero {
+    padding: 50px 0;
+  }
+
+  .about-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .about-content {
+    padding: 50px 0;
+  }
+
+  .story-text h2 {
+    font-size: 1.7rem;
+  }
 }

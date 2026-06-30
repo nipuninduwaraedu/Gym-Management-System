@@ -1,52 +1,235 @@
-.admin-page {
-    padding: 40px;
-    background: #f5f7fa;
-    min-height: 100vh;
+/* ====================================
+   ADMIN BOOKINGS PAGE STYLES
+   ==================================== */
+
+.admin-bookings-page {
+  padding: 40px 0 60px;
+  background-color: var(--bg);
+  min-height: calc(100vh - 100px);
 }
 
-.admin-page h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #222;
+.admin-header {
+  margin-bottom: 32px;
+}
+
+.admin-header h1 {
+  font-size: 2.2rem;
+  color: var(--secondary);
+  margin-bottom: 6px;
+}
+
+.admin-header p {
+  font-size: 1.05rem;
+  color: var(--text-light);
+}
+
+/* Loading & Empty States */
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.empty-state h2 {
+  font-size: 1.6rem;
+  color: var(--secondary);
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  font-size: 1.05rem;
+  color: var(--text-light);
+}
+
+/* Admin Table */
+.admin-table-container {
+  width: 100%;
 }
 
 .admin-table {
-    width: 100%;
-    max-width: 1000px;
-    margin: auto;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.admin-table th,
-.admin-table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
+.admin-table thead {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
 .admin-table th {
-    background: #007bff;
-    color: white;
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  color: white;
+  font-size: 0.95rem;
 }
 
-.admin-table select {
-    padding: 5px;
-    border-radius: 5px;
+.admin-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
 }
 
-.admin-table button {
-    padding: 5px 10px;
-    background: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
-.admin-table button:hover {
-    background: darkred;
+.table-row:hover {
+  background-color: rgba(37, 99, 235, 0.03);
+}
+
+/* User Cell */
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-initial {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--secondary);
+  font-size: 0.98rem;
+}
+
+.user-email {
+  font-size: 0.88rem;
+  color: var(--text-light);
+}
+
+/* Status Select */
+.status-select {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  background-color: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.status-select:hover {
+  border-color: var(--primary);
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn-small {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+}
+
+/* Mobile Bookings */
+.mobile-bookings {
+  display: none;
+}
+
+/* ====================================
+   RESPONSIVE STYLES
+   ==================================== */
+
+@media (max-width: 968px) {
+  .admin-table {
+    display: none;
+  }
+
+  .mobile-bookings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mobile-booking-card {
+    padding: 24px;
+  }
+
+  .mobile-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .detail-label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.92rem;
+  }
+
+  .detail-value {
+    color: var(--secondary);
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-bookings-page {
+    padding: 30px 0 50px;
+  }
+
+  .admin-header h1 {
+    font-size: 1.8rem;
+  }
 }

@@ -1,140 +1,231 @@
+/* ====================================
+   PRICING PAGE STYLES
+   ==================================== */
+
 .pricing-page {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 20px;
+    padding: 80px 0;
 }
 
-.pricing-page h1 {
+.pricing-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
-.admin-controls {
+.pricing-header h1 {
+    font-size: 2.8rem;
+    color: var(--secondary);
+    margin-bottom: 12px;
+}
+
+.pricing-header p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 24px;
+}
+
+/* Loading & Error States */
+.loading-state,
+.error-state,
+.empty-state {
     text-align: center;
-    margin-bottom: 30px;
+    padding: 60px 20px;
 }
 
-.admin-controls button {
-    background: #0d6efd;
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
 }
 
-.admin-controls button:hover {
-    background: #0a58ca;
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
+.error-message {
+    color: var(--danger);
+    font-size: 1.1rem;
+}
+
+.empty-text {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+.empty-hint {
+    color: var(--text-light);
+}
+
+/* Membership Form */
 .membership-form {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
-    max-width: 500px;
-    margin: 0 auto 30px;
+    max-width: 600px;
+    margin: 0 auto 60px;
+    padding: 36px;
 }
 
 .membership-form h3 {
-    margin-bottom: 20px;
+    font-size: 1.6rem;
+    color: var(--secondary);
+    margin-bottom: 28px;
     text-align: center;
 }
 
-.membership-form .form-group {
-    margin-bottom: 15px;
-}
-
-.membership-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.membership-form input,
-.membership-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.membership-form textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.membership-form button {
-    width: 100%;
-    background: #0d6efd;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.membership-form button:hover {
-    background: #0a58ca;
-}
-
-.pricing-container {
+.form-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
+.form-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-top: 28px;
+}
+
+.btn.small {
+    padding: 8px 20px;
+    font-size: 0.95rem;
+}
+
+/* Pricing Grid */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Pricing Card */
 .pricing-card {
-    background: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    position: relative;
+    padding: 40px 32px;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.pricing-card h2 {
-    margin-bottom: 15px;
+.pricing-card:hover {
+    transform: translateY(-8px);
+}
+
+.pricing-card.featured {
+    border: 3px solid var(--primary);
+    transform: scale(1.05);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-8px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--primary) 0%, #1D4ED8 100%);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
 .pricing-card h3 {
-    color: #0d6efd;
-    margin-bottom: 15px;
+    font-size: 1.7rem;
+    color: var(--secondary);
+    margin-bottom: 20px;
 }
 
-.pricing-card p {
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.card-actions {
-    margin-top: 20px;
+.price {
     display: flex;
-    gap: 10px;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 24px;
+}
+
+.currency {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.amount {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.period {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.description {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
     justify-content: center;
 }
 
-.card-actions button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+/* ====================================
+   RESPONSIVE STYLES
+   ==================================== */
+
+@media (max-width: 968px) {
+    .pricing-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-8px);
+    }
+
+    .amount {
+        font-size: 2.5rem;
+    }
 }
 
-.card-actions button:first-child {
-    background: #ffc107;
-    color: #000;
-}
+@media (max-width: 568px) {
+    .pricing-page {
+        padding: 50px 0;
+    }
 
-.card-actions button:last-child {
-    background: #dc3545;
-    color: white;
-}
+    .pricing-header h1 {
+        font-size: 1.9rem;
+    }
 
-.pricing-message {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 80px;
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .membership-form {
+        padding: 24px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
 }

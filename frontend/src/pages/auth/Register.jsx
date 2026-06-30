@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { registerUser } from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
 
-import "./Register.css";
+import "./Login.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -66,32 +66,34 @@ function Register() {
   };
 
   return (
-    <section className="register-page">
-      <div className="register-card">
-        <h2>Create Account</h2>
-
-        <p>Join Gym Management System</p>
+    <section className="auth-page">
+      <div className="auth-card card">
+        <div className="auth-header">
+          <div className="auth-logo">💪</div>
+          <h2>Create Account</h2>
+          <p>Join FitLife Gym today!</p>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Name</label>
+            <label>Full Name</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Enter your name"
+              placeholder="John Doe"
             />
           </div>
 
           <div className="form-group">
-            <label>Email</label>
+            <label>Email Address</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder="you@example.com"
             />
           </div>
 
@@ -102,29 +104,71 @@ function Register() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter password"
+              placeholder="••••••••"
             />
           </div>
 
           <div className="form-group">
-            <label>Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-            >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
+            <label>Select Your Role</label>
+            <div className="role-selector">
+              <label
+                className={`role-option ${
+                  formData.role === "user" ? "selected" : ""
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="role"
+                  value="user"
+                  checked={formData.role === "user"}
+                  onChange={handleChange}
+                />
+                <span className="role-label">
+                  <span className="role-icon">🏋️</span>
+                  <span className="role-name">User</span>
+                </span>
+              </label>
+
+              <label
+                className={`role-option ${
+                  formData.role === "admin" ? "selected" : ""
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="role"
+                  value="admin"
+                  checked={formData.role === "admin"}
+                  onChange={handleChange}
+                />
+                <span className="role-label">
+                  <span className="role-icon">👑</span>
+                  <span className="role-name">Admin</span>
+                </span>
+              </label>
+            </div>
           </div>
 
-          {error && <p className="error">{error}</p>}
-          {success && <p className="success">{success}</p>}
+          {error && <div className="alert alert-error">{error}</div>}
+          {success && <div className="alert alert-success">{success}</div>}
 
-          <button disabled={loading}>
-            {loading ? "Creating..." : "Register"}
+          <button
+            type="submit"
+            className="btn btn-primary w-full"
+            disabled={loading}
+          >
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
+
+        <div className="auth-footer">
+          <p>
+            Already have an account?{" "}
+            <Link to="/login" className="auth-link">
+              Login Here
+            </Link>
+          </p>
+        </div>
       </div>
     </section>
   );

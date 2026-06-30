@@ -63,7 +63,7 @@ function Pricing() {
             price: Number(formData.price),
             duration: Number(formData.duration),
           },
-          token
+          token,
         );
       }
       setShowForm(false);
@@ -103,101 +103,170 @@ function Pricing() {
   };
 
   if (loading) {
-    return <div className="pricing-message">Loading memberships...</div>;
+    return (
+      <div className="pricing-page">
+        <div className="container">
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <p>Loading memberships...</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  if (error) {
-    return <div className="pricing-message">{error}</div>;
+  if (error && !memberships.length) {
+    return (
+      <div className="pricing-page">
+        <div className="container">
+          <div className="error-state">
+            <p className="error-message">{error}</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <section className="pricing-page">
-      <h1>Membership Plans</h1>
+    <div className="pricing-page">
+      <div className="container">
+        <div className="pricing-header">
+          <h1>Membership Plans</h1>
+          <p>Choose the perfect plan for your fitness journey</p>
 
-      {isAdmin && (
-        <div className="admin-controls">
-          <button onClick={() => setShowForm(!showForm)}>
-            {showForm ? "Cancel" : "Add New Membership"}
-          </button>
-        </div>
-      )}
-
-      {isAdmin && showForm && (
-        <div className="membership-form">
-          <h3>{editingMembership ? "Edit Membership" : "Create New Membership"}</h3>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleFormChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Price (LKR)</label>
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleFormChange}
-                required
-                min="0"
-              />
-            </div>
-            <div className="form-group">
-              <label>Duration (Months)</label>
-              <input
-                type="number"
-                name="duration"
-                value={formData.duration}
-                onChange={handleFormChange}
-                required
-                min="1"
-              />
-            </div>
-            <div className="form-group">
-              <label>Description</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleFormChange}
-                required
-              />
-            </div>
-            <button type="submit">
-              {editingMembership ? "Update" : "Create"}
+          {isAdmin && (
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowForm(!showForm)}
+            >
+              {showForm ? "Cancel" : "Add New Membership"}
             </button>
-          </form>
+          )}
         </div>
-      )}
 
-      <div className="pricing-container">
-        {memberships.map((membership) => (
-          <div key={membership._id} className="pricing-card">
-            <h2>{membership.name}</h2>
-            <h3>LKR {membership.price}</h3>
-            <p>{membership.duration} Month(s)</p>
-            <p>{membership.description}</p>
-
-            {isAdmin && (
-              <div className="card-actions">
-                <button onClick={() => handleEdit(membership)}>Edit</button>
-                <button onClick={() => handleDelete(membership._id)}>
-                  Delete
+        {isAdmin && showForm && (
+          <div className="membership-form card">
+            <h3>
+              {editingMembership ? "Edit Membership" : "Create New Membership"}
+            </h3>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Plan Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  required
+                  placeholder="e.g., Basic"
+                />
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Price (LKR)</label>
+                  <input
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleFormChange}
+                    required
+                    min="0"
+                    placeholder="e.g., 2000"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Duration (Months)</label>
+                  <input
+                    type="number"
+                    name="duration"
+                    value={formData.duration}
+                    onChange={handleFormChange}
+                    required
+                    min="1"
+                    placeholder="e.g., 1"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>Description</label>
+                <textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleFormChange}
+                  required
+                  placeholder="e.g., Perfect for beginners..."
+                  rows="3"
+                />
+              </div>
+              <div className="form-actions">
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={() => {
+                    setShowForm(false);
+                    setEditingMembership(null);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  {editingMembership ? "Update Plan" : "Create Plan"}
                 </button>
               </div>
-            )}
+            </form>
           </div>
-        ))}
-
-        {memberships.length === 0 && (
-          <p className="pricing-message">No membership plans found</p>
         )}
+
+        <div className="pricing-grid">
+          {memberships.map((membership, index) => (
+            <div
+              key={membership._id}
+              className={`pricing-card card ${index === 1 ? "featured" : ""}`}
+            >
+              {index === 1 && <div className="popular-badge">Most Popular</div>}
+              <h3>{membership.name}</h3>
+              <div className="price">
+                <span className="currency">LKR</span>
+                <span className="amount">{membership.price}</span>
+                <span className="period">
+                  /{membership.duration} month
+                  {membership.duration > 1 ? "s" : ""}
+                </span>
+              </div>
+              <p className="description">{membership.description}</p>
+
+              {isAdmin && (
+                <div className="admin-actions">
+                  <button
+                    className="btn btn-outline small"
+                    onClick={() => handleEdit(membership)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-danger small"
+                    onClick={() => handleDelete(membership._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {memberships.length === 0 && (
+            <div className="empty-state">
+              <p className="empty-text">No membership plans yet</p>
+              {isAdmin && (
+                <p className="empty-hint">
+                  Create your first plan to get started!
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { loginUser } from "../../services/authService";
 import { AuthContext } from "../../context/AuthContext";
@@ -64,21 +64,23 @@ function Login() {
   };
 
   return (
-    <section className="login-page">
-      <div className="login-card">
-        <h2>Welcome Back</h2>
-
-        <p>Login to Gym Management System</p>
+    <section className="auth-page">
+      <div className="auth-card card">
+        <div className="auth-header">
+          <div className="auth-logo">💪</div>
+          <h2>Welcome Back</h2>
+          <p>Login to your FitLife Gym account</p>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
+            <label>Email Address</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter email"
+              placeholder="you@example.com"
             />
           </div>
 
@@ -89,17 +91,30 @@ function Login() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter password"
+              placeholder="••••••••"
             />
           </div>
 
-          {error && <p className="error">{error}</p>}
-          {success && <p className="success">{success}</p>}
+          {error && <div className="alert alert-error">{error}</div>}
+          {success && <div className="alert alert-success">{success}</div>}
 
-          <button disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button
+            type="submit"
+            className="btn btn-primary w-full"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login to Account"}
           </button>
         </form>
+
+        <div className="auth-footer">
+          <p>
+            Don't have an account?{" "}
+            <Link to="/register" className="auth-link">
+              Create Account
+            </Link>
+          </p>
+        </div>
       </div>
     </section>
   );
